@@ -1,0 +1,43 @@
+name: mobile
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_map: ^7.0.2
+  flutter_map_tile_caching: ^9.0.0
+  latlong2: ^0.9.0
+  flutter_riverpod: ^2.4.0
+  flutter_dotenv: ^5.0.2
+  permission_handler: ^11.3.1
+  http: ^1.2.0
+  web_socket_channel: ^2.4.0
+  geolocator: ^10.1.0
+  uuid: ^4.2.0
+  google_fonts: ^6.2.0
+  cupertino_icons: ^1.0.8
+  isar: ^3.1.0
+  isar_flutter_libs: ^3.1.0+1
+  path_provider: ^2.1.1
+  workmanager: ^0.9.0+3
+  shared_preferences: ^2.2.1
+  intl: ^0.18.1
+  logger: ^2.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  isar_generator: ^3.1.0
+  build_runner: ^2.4.6
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
+    - assets/data/

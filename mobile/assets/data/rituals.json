@@ -1,0 +1,22 @@
+﻿[
+  {
+    "ritualId": "rit_001",
+    "title": "Ganga Aarti",
+    "description": "The evening prayer ceremony at the banks of the Ganges.",
+    "location": "Dashashwamedh Ghat",
+    "locationCoord": [25.306, 83.011],
+    "category": "prayer",
+    "startTime": "2027-01-14T18:00:00Z",
+    "importance": "high"
+  },
+  {
+    "ritualId": "rit_002",
+    "title": "Shahi Snan (Royal Bath)",
+    "description": "The main ceremonial bath of the Kumbh Mela.",
+    "location": "Sangam",
+    "locationCoord": [25.429, 81.886],
+    "category": "snan",
+    "startTime": "2027-01-14T04:00:00Z",
+    "importance": "critical"
+  }
+]

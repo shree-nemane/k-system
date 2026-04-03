@@ -1,0 +1,49 @@
+{
+  "rituals": [
+    {
+      "name": "Paush Purnima Bath",
+      "date": "Jan 13, 2027",
+      "time": "04:00 - 18:00",
+      "importance": "High",
+      "location": "Sangam Ghat"
+    },
+    {
+      "name": "Makar Sankranti (Shahi Snan)",
+      "date": "Jan 14, 2027",
+      "time": "03:30 - 19:00",
+      "importance": "Critical",
+      "location": "Main Sangam"
+    },
+    {
+      "name": "Mauni Amavasya",
+      "date": "Feb 06, 2027",
+      "time": "00:00 - 23:59",
+      "importance": "Critical",
+      "location": "All Ghats"
+    }
+  ],
+  "safety": [
+    {
+      "title": "Crowd Safety",
+      "content": "Follow the designated exit routes. Do not stop in the middle of a moving crowd."
+    },
+    {
+      "title": "Emergency SOS",
+      "content": "Press and hold the SOS button for 3 seconds to alert the safety command center."
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Main Police Control",
+      "number": "100"
+    },
+    {
+      "name": "MahaKumbh Helpdesk",
+      "number": "1920"
+    },
+    {
+      "name": "Emergency Medical",
+      "number": "108"
+    }
+  ]
+}

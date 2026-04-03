@@ -1,0 +1,83 @@
+[2026-04-03 15:06:40] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 15:06:40] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 15:06:41] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 15:06:41] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 15:08:34] [INFO] [app.crowd]: [Crowd] Camera CAM_04_SOUTH HIGH density detected. Tracking for sustained alert...
+[2026-04-03 15:19:43] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-03 15:19:43] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-03 15:19:43] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-03 15:19:43] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 2
+[2026-04-03 15:20:18] [DEBUG] [app.crowd]: [Crowd] Camera CAM_04_SOUTH steady HIGH for 703.7s
+[2026-04-03 15:20:18] [WARNING] [app.crowd]: [Crowd] Camera CAM_04_SOUTH SUSTAINED HIGH for 703.7s. Triggering alert!
+[2026-04-03 15:24:12] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 1
+[2026-04-03 15:24:12] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-03 15:24:12] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 15:24:15] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 15:24:15] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 15:24:17] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-03 15:24:17] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-03 15:25:07] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-03 15:25:19] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-03 15:25:19] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-03 15:25:19] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-03 15:25:19] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 2
+[2026-04-03 15:26:29] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 1
+[2026-04-03 15:26:29] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-03 15:28:45] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 17:21:31] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 17:21:31] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 17:21:37] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-03 17:21:37] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-03 17:22:06] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-03 17:22:15] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-03 17:22:15] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-03 17:22:15] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-03 17:22:15] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 2
+[2026-04-03 17:37:49] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 1
+[2026-04-03 17:37:49] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-03 17:51:20] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 17:52:24] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 17:52:24] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 17:53:08] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 17:53:10] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 17:53:10] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:11:04] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 18:14:14] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:14:14] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:15:40] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 18:15:41] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:15:41] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:16:24] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 18:16:25] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:16:25] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:17:32] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 18:17:33] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:17:33] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:17:34] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:17:34] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:21:13] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 18:21:14] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:21:14] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:21:16] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:21:16] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:24:13] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 18:24:14] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:24:14] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:24:15] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:24:15] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:25:56] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 18:25:57] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:25:57] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:34:48] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 18:34:50] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:34:50] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:37:23] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 18:37:24] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:37:24] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:39:24] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 18:39:58] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:39:58] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:39:59] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-03 18:40:04] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-03 18:40:04] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-03 18:40:22] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down

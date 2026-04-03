@@ -1,0 +1,44 @@
+{
+  "cameras": [
+    {
+      "id": "cam_01",
+      "name": "Triveni Sangam Ghat – Main",
+      "location_label": "Triveni Sangam",
+      "source": 0,
+      "active": true,
+      "low_thresh": 30,
+      "high_thresh": 75,
+      "max_age": 10
+    },
+    {
+      "id": "cam_02",
+      "name": "Ram Ghat – Entry",
+      "location_label": "Ram Ghat",
+      "source": "rtsp://192.168.1.102/stream",
+      "active": false,
+      "low_thresh": 20,
+      "high_thresh": 60,
+      "max_age": 10
+    },
+    {
+      "id": "cam_03",
+      "name": "Sector 4 – Pontoon Bridge",
+      "location_label": "Sector 4 Bridge",
+      "source": "rtsp://192.168.1.103/stream",
+      "active": false,
+      "low_thresh": 15,
+      "high_thresh": 40,
+      "max_age": 8
+    },
+    {
+      "id": "cam_04",
+      "name": "Magh Mela Camp – North Gate",
+      "location_label": "Camp North Gate",
+      "source": "rtsp://192.168.1.104/stream",
+      "active": false,
+      "low_thresh": 30,
+      "high_thresh": 75,
+      "max_age": 10
+    }
+  ]
+}

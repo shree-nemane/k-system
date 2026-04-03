@@ -1,0 +1,64 @@
+{
+  "markers": [
+    {"id": "G1", "name": "Main Sangam Ghat", "type": "ghat", "lat": 25.43, "lng": 81.89},
+    {"id": "G2", "name": "Arail Ghat", "type": "ghat", "lat": 25.41, "lng": 81.90},
+    {"id": "H1", "name": "Sector 4 Hub", "type": "hub", "lat": 25.42, "lng": 81.88},
+    {"id": "H2", "name": "Main Entrance Hub", "type": "hub", "lat": 25.45, "lng": 81.85}
+  ],
+  "sectors": [
+    {
+      "id": 1,
+      "name": "Sangam Main",
+      "color": "0xFFFFCC80",
+      "points": [
+        {"lat": 25.43, "lng": 81.87},
+        {"lat": 25.44, "lng": 81.88},
+        {"lat": 25.44, "lng": 81.89},
+        {"lat": 25.43, "lng": 81.89}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Arail Sector",
+      "color": "0xFF80CBC4",
+      "points": [
+        {"lat": 25.41, "lng": 81.88},
+        {"lat": 25.42, "lng": 81.89},
+        {"lat": 25.42, "lng": 81.90},
+        {"lat": 25.41, "lng": 81.90}
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "id": "R1",
+      "name": "Sangam Approach Path",
+      "color": "0xFF1976D2",
+      "path": [
+        {"lat": 25.45, "lng": 81.85},
+        {"lat": 25.44, "lng": 81.86},
+        {"lat": 25.43, "lng": 81.88}
+      ]
+    },
+    {
+      "id": "R2",
+      "name": "Saraswati Ghat Trail",
+      "color": "0xFF388E3C",
+      "path": [
+        {"lat": 25.43, "lng": 81.85},
+        {"lat": 25.425, "lng": 81.86},
+        {"lat": 25.43, "lng": 81.87}
+      ]
+    },
+    {
+      "id": "R3",
+      "name": "Pontoon Bridge 4",
+      "color": "0xFFFBC02D",
+      "path": [
+        {"lat": 25.42, "lng": 81.88},
+        {"lat": 25.415, "lng": 81.885},
+        {"lat": 25.41, "lng": 81.89}
+      ]
+    }
+  ]
+}
