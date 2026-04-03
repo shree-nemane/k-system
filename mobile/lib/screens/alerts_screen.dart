@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../providers/live_alert_provider.dart';
 import '../providers/alert_provider.dart';
+import '../core/theme.dart';
+import '../core/constants.dart';
 
 class AlertsScreen extends ConsumerWidget {
   const AlertsScreen({super.key});
@@ -12,16 +13,13 @@ class AlertsScreen extends ConsumerWidget {
     final alertsAsync = ref.watch(liveAlertProvider);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F6), // Digital Sanctuary Ivory
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text(
-          'Security Alerts',
-          style: GoogleFonts.plusJakartaSans(
-            fontWeight: FontWeight.w800,
-            color: const Color(0xFF1A3A5F),
-          ),
+          'Divine Protection Feed',
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: false,
       ),
@@ -33,26 +31,22 @@ class AlertsScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(32),
                     decoration: BoxDecoration(
-                      color: Colors.green.withValues(alpha: 0.1),
+                      color: Colors.green.withValues(alpha: 0.05),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.shield_outlined, size: 64, color: Colors.green),
+                    child: const Icon(Icons.verified_user, size: 80, color: Colors.green),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 32),
                   Text(
                     'All Sectors Secure',
-                    style: GoogleFonts.plusJakartaSans(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFF1A3A5F),
-                    ),
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 12),
                   Text(
-                    'AI surveillance reports no active incidents.',
-                    style: GoogleFonts.inter(color: Colors.grey[600]),
+                    'Divine protection is active across all sectors.',
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],
               ),
@@ -60,35 +54,25 @@ class AlertsScreen extends ConsumerWidget {
           }
           return ListView.builder(
             itemCount: alerts.length,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             itemBuilder: (ctx, index) {
               final alert = alerts[index];
               final severityColor = _getSeverityColor(alert.severity);
               
               return Container(
-                margin: const EdgeInsets.only(bottom: 16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.03),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
+                margin: const EdgeInsets.only(bottom: 20),
+                decoration: AppTheme.sanctuaryCardDecoration,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(24),
                   child: IntrinsicHeight(
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         // Severity Indicator Strip
-                        Container(width: 6, color: severityColor),
+                        Container(width: 8, color: severityColor),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(24.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -96,44 +80,39 @@ class AlertsScreen extends ConsumerWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                       decoration: BoxDecoration(
                                         color: severityColor.withValues(alpha: 0.1),
-                                        borderRadius: BorderRadius.circular(8),
+                                        borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: Text(
                                         alert.severity.toUpperCase(),
-                                        style: TextStyle(
+                                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
                                           color: severityColor,
                                           fontSize: 10,
                                           fontWeight: FontWeight.w900,
-                                          letterSpacing: 0.5,
                                         ),
                                       ),
                                     ),
                                     Text(
                                       '${DateTime.now().difference(alert.firedAt).inMinutes}m ago',
-                                      style: GoogleFonts.inter(fontSize: 12, color: Colors.grey),
+                                      style: Theme.of(context).textTheme.bodyMedium,
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 12),
+                                const SizedBox(height: 16),
                                 Text(
                                   alert.eventType.replaceAll('_', ' ').toUpperCase(),
-                                  style: GoogleFonts.plusJakartaSans(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 16,
-                                    color: const Color(0xFF1A3A5F),
-                                  ),
+                                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
                                 ),
-                                const SizedBox(height: 8),
+                                const SizedBox(height: 12),
                                 Row(
                                   children: [
-                                    const Icon(Icons.location_on_outlined, size: 14, color: Colors.grey),
-                                    const SizedBox(width: 4),
+                                    const Icon(Icons.location_pin, size: 16, color: AppColors.secondary),
+                                    const SizedBox(width: 6),
                                     Text(
-                                      'Sector 4', 
-                                      style: GoogleFonts.inter(fontSize: 13, color: Colors.blueGrey),
+                                      'Sector 4 • Prayagraj', 
+                                      style: Theme.of(context).textTheme.bodyMedium,
                                     ),
                                   ],
                                 ),
@@ -149,19 +128,26 @@ class AlertsScreen extends ConsumerWidget {
             },
           );
         },
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const Center(child: CircularProgressIndicator(color: AppColors.primary)),
         error: (err, stack) => Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.error_outline, size: 48, color: Colors.red),
-              const SizedBox(height: 12),
-              const Text('Safety feed temporarily unavailable'),
-              const SizedBox(height: 12),
+              const Icon(Icons.wifi_off_outlined, size: 64, color: AppColors.alert),
+              const SizedBox(height: 24),
+              Text(
+                'Safety Feed Offline',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: 16),
               TextButton.icon(
                 onPressed: () => ref.refresh(alertProvider),
                 icon: const Icon(Icons.refresh),
-                label: const Text('RECONNECT'),
+                label: const Text('RECONNECT TO FEED'),
+                style: TextButton.styleFrom(
+                  foregroundColor: AppColors.secondary,
+                  textStyle: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2),
+                ),
               ),
             ],
           ),
@@ -172,10 +158,10 @@ class AlertsScreen extends ConsumerWidget {
 
   Color _getSeverityColor(String severity) {
     switch (severity.toLowerCase()) {
-      case 'critical': return Colors.red;
+      case 'critical': return AppColors.alert;
       case 'high': return Colors.orange;
-      case 'medium': return const Color(0xFFE6A85C); // Saffron
-      default: return Colors.blue;
+      case 'medium': return AppColors.primary;
+      default: return AppColors.secondary;
     }
   }
 }

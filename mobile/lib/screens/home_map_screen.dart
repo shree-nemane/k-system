@@ -7,7 +7,10 @@ import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../core/constants.dart';
-import '../providers/crowd_provider.dart';
+import '../services/location_service.dart';
+import '../providers/navigation_provider.dart';
+import 'package:geolocator/geolocator.dart';
+import 'dart:async';
 
 class HomeMapScreen extends ConsumerStatefulWidget {
   const HomeMapScreen({super.key});
@@ -24,12 +27,51 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
   List<Polyline> _polylines = [];
   List<Marker> _markers = [];
   bool _isDataLoading = true;
+  bool _showRoutes = false;
+  LatLng? _userPosition;
+  final LocationService _locationService = LocationService();
+  StreamSubscription<Position>? _locationSubscription;
 
   @override
   void initState() {
     super.initState();
     _initializeCache();
     _loadMapData();
+    _startLocationTracking();
+  }
+
+  @override
+  void dispose() {
+    _locationSubscription?.cancel();
+    super.dispose();
+  }
+
+  void _startLocationTracking() async {
+    final permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      await Geolocator.requestPermission();
+    }
+
+    _locationSubscription = _locationService.locationStream.listen((position) {
+      if (mounted) {
+        setState(() {
+          _userPosition = LatLng(position.latitude, position.longitude);
+        });
+      }
+    });
+
+    final initial = await _locationService.getCurrentLocation();
+    if (initial != null && mounted) {
+      setState(() {
+        _userPosition = LatLng(initial.latitude, initial.longitude);
+      });
+    }
+  }
+
+  void _centerOnUser() {
+    if (_userPosition != null) {
+      _mapController.move(_userPosition!, 16);
+    }
   }
 
   Future<void> _loadMapData() async {
@@ -60,14 +102,20 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
 
         _markers = (data['markers'] as List).map((m) {
           final isGhat = m['type'] == 'ghat';
+          final point = LatLng(m['lat'], m['lng']);
+          final name = m['name'];
+          
           return Marker(
-            point: LatLng(m['lat'], m['lng']),
+            point: point,
             width: 40,
             height: 40,
-            child: Icon(
-              isGhat ? Icons.water_drop : Icons.help_center,
-              color: isGhat ? Colors.blue : AppColors.primary,
-              size: 30,
+            child: GestureDetector(
+              onTap: () => _showMarkerDetails(name, point),
+              child: Icon(
+                isGhat ? Icons.water_drop : Icons.help_center,
+                color: isGhat ? Colors.blue : AppColors.primary,
+                size: 30,
+              ),
             ),
           );
         }).toList();
@@ -86,15 +134,57 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
     }
   }
 
+  void _showMarkerDetails(String name, LatLng point) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(name, style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            Text('Point of Interest', style: GoogleFonts.inter(color: Colors.grey)),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pop(context);
+                  ref.read(navigationProvider.notifier).startNavigation(point, name);
+                },
+                icon: const Icon(Icons.navigation, color: Colors.white),
+                label: const Text('NAVIGATE HERE', style: TextStyle(color: Colors.white)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Future<void> _initializeCache() async {
     final store = FMTCStore(_storeName);
-    await store.manage.create();
+    try {
+      if (!await store.manage.ready) {
+        await store.manage.create();
+      }
+    } catch (e) {
+      debugPrint('FMTC Store creation non-fatal error: $e');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final globalDensity = ref.watch(globalDensityProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -120,8 +210,58 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
                 tileProvider: FMTCStore(_storeName).getTileProvider(),
               ),
               PolygonLayer(polygons: _polygons),
-              PolylineLayer(polylines: _polylines),
-              MarkerLayer(markers: _markers),
+              if (_showRoutes) PolylineLayer(polylines: _polylines),
+              Consumer(
+                builder: (context, ref, child) {
+                  final navState = ref.watch(navigationProvider);
+                  if (navState.isNavigating && _userPosition != null && navState.destination != null) {
+                    return PolylineLayer(
+                      polylines: [
+                        Polyline(
+                          points: [_userPosition!, navState.destination!],
+                          color: AppColors.primary,
+                          strokeWidth: 4,
+                          pattern: StrokePattern.dashed(segments: const [10, 5]),
+                        ),
+                      ],
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
+              ),
+              MarkerLayer(
+                markers: [
+                  ..._markers,
+                  if (_userPosition != null)
+                    Marker(
+                      point: _userPosition!,
+                      width: 50,
+                      height: 50,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            width: 20,
+                            height: 20,
+                            decoration: BoxDecoration(
+                              color: Colors.blue.withValues(alpha: 0.3),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          Container(
+                            width: 12,
+                            height: 12,
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white, width: 2),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
             ],
           ),
           if (_isDataLoading)
@@ -152,43 +292,68 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
             ),
           ),
 
-          // Crowd Density Overlay
+          // Layer & Location Controls
           Positioned(
-            top: 20,
+            bottom: 30,
             right: 20,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.95),
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 10, offset: Offset(0, 4))],
-              ),
-              child: Column(
-                children: [
-                  Text('GLOBAL DENSITY', style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.primary)),
-                  const SizedBox(height: 4),
-                  Text(
-                    '${(globalDensity * 100).toInt()}%',
-                    style: GoogleFonts.inter(fontSize: 24, fontWeight: FontWeight.bold, color: _getDensityColor(globalDensity)),
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                FloatingActionButton.small(
+                  heroTag: 'toggle_routes',
+                  onPressed: () => setState(() => _showRoutes = !_showRoutes),
+                  backgroundColor: _showRoutes ? AppColors.primary : Colors.white,
+                  child: Icon(Icons.route, color: _showRoutes ? Colors.white : AppColors.primary),
+                ),
+                const SizedBox(height: 12),
+                FloatingActionButton(
+                  heroTag: 'center_me',
+                  onPressed: _centerOnUser,
+                  backgroundColor: AppColors.primary,
+                  child: const Icon(Icons.my_location, color: Colors.white),
+                ),
+              ],
             ),
+          ),
+
+          // Simple Navigation Banner
+          Consumer(
+            builder: (context, ref, child) {
+              final navState = ref.watch(navigationProvider);
+              if (!navState.isNavigating) return const SizedBox.shrink();
+              
+              return Positioned(
+                top: 80,
+                left: 20,
+                right: 20,
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10)],
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.navigation, color: AppColors.primary),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          navState.instruction ?? '',
+                          style: GoogleFonts.inter(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () => ref.read(navigationProvider.notifier).stopNavigation(),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.large(
-        onPressed: () => Navigator.pushNamed(context, '/sos'),
-        backgroundColor: Colors.redAccent,
-        child: const Icon(Icons.emergency_outlined, size: 80, color: Colors.white),
-      ),
     );
-  }
-
-
-  Color _getDensityColor(double density) {
-    if (density > 0.8) return Colors.red;
-    if (density > 0.5) return Colors.orange;
-    return Colors.green;
   }
 }

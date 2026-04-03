@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../core/constants.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -35,65 +36,83 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Aesthetic
+          // Background - Sacred Horizon Gradient
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Color(0xFFFFB74D), Color(0xFFE65100)],
+                colors: [AppColors.primary, Color(0xFFD4A017)], // Saffron to Gold
               ),
             ),
+          ),
+          // Subtle Texture Overlay (Optional, using Opacity for now)
+          Opacity(
+            opacity: 0.1,
+            child: Container(color: Colors.white),
           ),
           // Content
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(32.0),
+              padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 32.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.temple_hindu, size: 100, color: Colors.white),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 40),
+                  const Icon(Icons.auto_awesome, size: 80, color: Colors.white70),
+                  const SizedBox(height: 40),
                   Text(
                     'MahaKumbh 2027',
-                    style: GoogleFonts.plusJakartaSans(
-                      fontSize: 42,
+                    style: GoogleFonts.notoSerif(
+                      fontSize: 48,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       letterSpacing: -1,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 16),
                   Text(
-                    'Your spiritual journey, secured by AI and modern mapping.',
+                    'Your sacred journey, guided by wisdom and secured by AI.',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
-                      fontSize: 18,
+                    style: GoogleFonts.manrope(
+                      fontSize: 20,
                       color: Colors.white.withValues(alpha: 0.9),
-                      height: 1.5,
+                      height: 1.6,
                     ),
                   ),
                   const Spacer(),
                   SizedBox(
                     width: double.infinity,
-                    height: 64,
+                    height: 72,
                     child: ElevatedButton(
                       onPressed: _isRequesting ? null : _getStarted,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        foregroundColor: const Color(0xFFE65100),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                        elevation: 0,
+                        foregroundColor: AppColors.primary,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(36)),
+                        elevation: 10,
+                        shadowColor: Colors.black26,
                       ),
                       child: _isRequesting 
-                        ? const CircularProgressIndicator()
-                        : const Text('BEGIN YOUR YATRA', style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+                        ? const CircularProgressIndicator(color: AppColors.primary)
+                        : Text(
+                            'BEGIN YOUR YATRA', 
+                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: AppColors.primary,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 32),
                   Text(
-                    'Prayagraj, Uttar Pradesh',
-                    style: GoogleFonts.inter(fontSize: 12, color: Colors.white70),
+                    'Prayagraj • The Holy Confluence',
+                    style: GoogleFonts.manrope(
+                      fontSize: 14, 
+                      color: Colors.white70,
+                      letterSpacing: 1.5,
+                    ),
                   ),
                 ],
               ),

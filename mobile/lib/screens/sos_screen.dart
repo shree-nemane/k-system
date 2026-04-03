@@ -9,6 +9,8 @@ import '../providers/isar_provider.dart';
 import '../services/sos_service.dart';
 import '../models/sos_request.dart';
 import '../screens/safety_settings_screen.dart';
+import '../core/theme.dart';
+import '../core/constants.dart';
 
 class SOSScreen extends ConsumerStatefulWidget {
   const SOSScreen({super.key});
@@ -25,11 +27,11 @@ class _SOSScreenState extends ConsumerState<SOSScreen> with TickerProviderStateM
   Timer? _countdownTimer;
   Timer? _statusPollingTimer;
   
-  String _statusMessage = 'Emergency Assistance';
+  String _statusMessage = 'Initiate Sacred Protection';
   String _currentStatus = 'none'; // none, pending, sent, received, dispatched
   String? _responderName;
   Position? _currentPosition;
-
+  
   @override
   void initState() {
     super.initState();
@@ -62,10 +64,10 @@ class _SOSScreenState extends ConsumerState<SOSScreen> with TickerProviderStateM
           _currentStatus = latestPulse.status;
           _responderName = latestPulse.responderName;
           
-          if (_currentStatus == 'pending') _statusMessage = 'Queuing SOS Pulse...';
-          if (_currentStatus == 'sent') _statusMessage = 'Sent. Waiting for Authority Ack.';
-          if (_currentStatus == 'received') _statusMessage = 'Received by Control Center.';
-          if (_currentStatus == 'dispatched') _statusMessage = 'Help Dispatched!';
+          if (_currentStatus == 'pending') _statusMessage = 'Connecting to Divine Shield...';
+          if (_currentStatus == 'sent') _statusMessage = 'Request Sent to Authorities.';
+          if (_currentStatus == 'received') _statusMessage = 'Control Center Ack.';
+          if (_currentStatus == 'dispatched') _statusMessage = 'Commanders Dispatched!';
         });
       }
     });
@@ -95,7 +97,7 @@ class _SOSScreenState extends ConsumerState<SOSScreen> with TickerProviderStateM
     _holdController.reset();
     setState(() {
       _showCountdown = false;
-      _statusMessage = 'SOS Cancelled';
+      _statusMessage = 'Sacred Protection Deferred';
       _currentStatus = 'none';
     });
     HapticFeedback.vibrate();
@@ -104,7 +106,7 @@ class _SOSScreenState extends ConsumerState<SOSScreen> with TickerProviderStateM
   Future<void> _executeSOS() async {
     setState(() {
       _isSending = true;
-      _statusMessage = 'Capturing Location...';
+      _statusMessage = 'Syncing Sacred Location...';
     });
 
     try {
@@ -129,7 +131,7 @@ class _SOSScreenState extends ConsumerState<SOSScreen> with TickerProviderStateM
       );
 
       setState(() {
-        _statusMessage = 'SOS Pulse Initiated.';
+        _statusMessage = 'SOS Pulse Active.';
         _currentStatus = 'pending';
       });
     } catch (e) {
@@ -143,28 +145,24 @@ class _SOSScreenState extends ConsumerState<SOSScreen> with TickerProviderStateM
     if (_currentStatus == 'none') return const SizedBox.shrink();
 
     return Container(
-      margin: const EdgeInsets.only(top: 32),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey[300]!),
-      ),
+      margin: const EdgeInsets.only(top: 40),
+      padding: const EdgeInsets.all(24),
+      decoration: AppTheme.sanctuaryCardDecoration,
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _StatusIcon(label: 'SENT', isActive: _currentStatus != 'none' && _currentStatus != 'pending', icon: Icons.cloud_upload),
-              _StatusIcon(label: 'RECEIVED', isActive: _currentStatus == 'received' || _currentStatus == 'dispatched', icon: Icons.assignment_turned_in),
-              _StatusIcon(label: 'HELP ON WAY', isActive: _currentStatus == 'dispatched', icon: Icons.local_police, isPulsing: _currentStatus == 'dispatched'),
+              _StatusIcon(label: 'SENT', isActive: _currentStatus != 'none' && _currentStatus != 'pending', icon: Icons.cloud_done_outlined),
+              _StatusIcon(label: 'ACKNOWLEDGED', isActive: _currentStatus == 'received' || _currentStatus == 'dispatched', icon: Icons.check_circle_outline),
+              _StatusIcon(label: 'HELP ACTIVE', isActive: _currentStatus == 'dispatched', icon: Icons.security, isPulsing: _currentStatus == 'dispatched'),
             ],
           ),
           if (_responderName != null) ...[
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
             Text(
-              'Responder: $_responderName',
-              style: GoogleFonts.inter(fontWeight: FontWeight.bold, color: Colors.green[700]),
+              'Commander assigned: $_responderName',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.green[800]),
             ),
           ]
         ],
@@ -175,13 +173,15 @@ class _SOSScreenState extends ConsumerState<SOSScreen> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: const Text('SOS Safety'),
-        backgroundColor: Colors.redAccent,
-        foregroundColor: Colors.white,
+        title: Text('Sacred Protection', style: Theme.of(context).textTheme.headlineMedium),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: false,
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings),
+            icon: const Icon(Icons.tune_outlined, color: AppColors.secondary),
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const SafetySettingsScreen()),
@@ -193,19 +193,19 @@ class _SOSScreenState extends ConsumerState<SOSScreen> with TickerProviderStateM
         children: [
           Center(
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.all(32.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Emergency SOS',
-                    style: GoogleFonts.inter(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.redAccent),
+                    style: Theme.of(context).textTheme.displayLarge?.copyWith(color: AppColors.alert),
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'HOLD SOS BUTTON TO ALERT AUTHORITIES',
+                    'HOLD SOS ICON TO SUMMON ASSISTANCE',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.grey[600]),
+                    style: Theme.of(context).textTheme.labelLarge,
                   ),
                   const SizedBox(height: 64),
                   GestureDetector(
@@ -215,28 +215,32 @@ class _SOSScreenState extends ConsumerState<SOSScreen> with TickerProviderStateM
                       alignment: Alignment.center,
                       children: [
                         SizedBox(
-                          width: 260,
-                          height: 260,
+                          width: 280,
+                          height: 280,
                           child: AnimatedBuilder(
                             animation: _holdController,
                             builder: (context, child) {
                               return CircularProgressIndicator(
                                 value: _holdController.value,
-                                strokeWidth: 12,
-                                color: Colors.redAccent,
-                                backgroundColor: Colors.grey[200],
+                                strokeWidth: 10,
+                                color: AppColors.alert,
+                                backgroundColor: AppColors.primary.withValues(alpha: 0.05),
                               );
                             },
                           ),
                         ),
                         Container(
-                          width: 220,
-                          height: 220,
+                          width: 230,
+                          height: 230,
                           decoration: BoxDecoration(
-                            color: _isSending ? Colors.grey : Colors.redAccent,
+                            gradient: const LinearGradient(
+                              colors: [AppColors.alert, Color(0xFF9E1B1B)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
                             shape: BoxShape.circle,
                             boxShadow: [
-                              BoxShadow(color: Colors.redAccent.withValues(alpha: 0.3), blurRadius: 30, spreadRadius: 10),
+                              BoxShadow(color: AppColors.alert.withValues(alpha: 0.3), blurRadius: 40, spreadRadius: 10),
                             ],
                           ),
                           child: Center(
@@ -244,7 +248,7 @@ class _SOSScreenState extends ConsumerState<SOSScreen> with TickerProviderStateM
                                 ? const CircularProgressIndicator(color: Colors.white)
                                 : const Text(
                                     'SOS',
-                                    style: TextStyle(fontSize: 56, fontWeight: FontWeight.w900, color: Colors.white),
+                                    style: TextStyle(fontSize: 64, fontWeight: FontWeight.w900, color: Colors.white, letterSpacing: -2),
                                   ),
                           ),
                         ),
@@ -255,7 +259,7 @@ class _SOSScreenState extends ConsumerState<SOSScreen> with TickerProviderStateM
                   Text(
                     _statusMessage,
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.grey[800]),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.onSurface),
                   ),
                   _buildStatusFeedback(),
                 ],
@@ -264,33 +268,34 @@ class _SOSScreenState extends ConsumerState<SOSScreen> with TickerProviderStateM
           ),
           if (_showCountdown)
             Container(
-              color: Colors.black.withValues(alpha: 0.9),
+              color: AppColors.onSurface.withValues(alpha: 0.95),
               width: double.infinity,
               height: double.infinity,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'SOS TRIGGERING IN',
-                    style: GoogleFonts.inter(color: Colors.white, fontSize: 20, letterSpacing: 2),
+                    'SHIELD ACTIVE IN',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Colors.white, letterSpacing: 4),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 32),
                   Text(
                     '$_countdownSeconds',
-                    style: GoogleFonts.inter(color: Colors.redAccent, fontSize: 120, fontWeight: FontWeight.w900),
+                    style: GoogleFonts.notoSerif(color: AppColors.alert, fontSize: 160, fontWeight: FontWeight.w900),
                   ),
                   const SizedBox(height: 60),
                   SizedBox(
-                    width: 280,
+                    width: 300,
                     height: 80,
                     child: ElevatedButton(
                       onPressed: _cancelSOS,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        foregroundColor: Colors.redAccent,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        foregroundColor: AppColors.alert,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                        elevation: 20,
                       ),
-                      child: const Text('CANCEL SOS', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                      child: const Text('CANCEL PROTECTION', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, letterSpacing: 1)),
                     ),
                   ),
                 ],

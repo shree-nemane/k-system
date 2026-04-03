@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primary = Color(0xFF2E5B7F);
-  static const Color secondary = Color(0xFFE6A85C); // Saffron
-  static const Color accent = Color(0xFFE6A85C);
-  static const Color background = Color(0xFFF9F9F6);
-  static const Color alert = Colors.redAccent;
+  // Sacred Horizon Palette
+  static const Color primary = Color(0xFF8F4E00); // Sacred Saffron
+  static const Color secondary = Color(0xFF4C56AF); // Confluence Blue
+  static const Color accent = Color(0xFFFF9933); // Bright Saffron
+  static const Color background = Color(0xFFFAFAEB); // Ivory Sanctuary
+  static const Color alert = Color(0xFFBA1A1A); // Material Error Red
   static const Color surface = Color(0xFFFFFFFF);
-  static const Color surfaceVariant = Color(0xFFFFFFFF);
+  static const Color onSurface = Color(0xFF1B1C14);
 }
 
 class AppConstants {

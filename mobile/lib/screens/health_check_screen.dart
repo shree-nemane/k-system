@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../core/constants.dart';
 import '../core/api_client.dart';
 
@@ -25,7 +24,7 @@ class _HealthCheckScreenState extends ConsumerState<HealthCheckScreen> {
   Future<void> _checkConnectivity() async {
     setState(() {
       _isChecking = true;
-      _status = 'Checking API Connectivity...\nTarget: ${ApiClient().baseUrl}';
+      _status = 'Connecting to Divine Network...\nTarget: ${ApiClient().baseUrl}';
       _failed = false;
     });
 
@@ -36,10 +35,10 @@ class _HealthCheckScreenState extends ConsumerState<HealthCheckScreen> {
         if (!mounted) return;
         Navigator.of(context).pushReplacementNamed('/home');
       } else {
-        _handleFailure('API error: ${response.statusCode}');
+        _handleFailure('API Unreachable: ${response.statusCode}');
       }
     } catch (e) {
-      _handleFailure('Connection failed. Backend may be offline.');
+      _handleFailure('Connection suspended. Check your sacred connection.');
     }
   }
 
@@ -54,41 +53,63 @@ class _HealthCheckScreenState extends ConsumerState<HealthCheckScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(40.0),
+          padding: const EdgeInsets.all(48.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.security, size: 80, color: AppColors.primary),
-              const SizedBox(height: 24),
+              Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.05),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.shield_outlined, size: 84, color: AppColors.secondary),
+              ),
+              const SizedBox(height: 40),
               Text(
                 'MahaKumbh 2027',
-                style: GoogleFonts.inter(fontSize: 28, fontWeight: FontWeight.bold, color: AppColors.primary),
+                style: Theme.of(context).textTheme.displayLarge?.copyWith(fontSize: 28, letterSpacing: -1),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 12),
               Text(
-                'Smart Guide & Safety System',
+                'Digital Sanctuary Connectivity',
                 textAlign: TextAlign.center,
-                style: GoogleFonts.inter(fontSize: 16, color: Colors.grey[600]),
+                style: Theme.of(context).textTheme.labelLarge,
               ),
-              const SizedBox(height: 48),
+              const SizedBox(height: 64),
               if (_isChecking)
-                const CircularProgressIndicator(color: AppColors.secondary)
+                const CircularProgressIndicator(color: AppColors.primary, strokeWidth: 2)
               else if (_failed) ...[
-                const Icon(Icons.cloud_off, size: 48, color: Colors.redAccent),
-                const SizedBox(height: 16),
-                Text(_status, textAlign: TextAlign.center, style: GoogleFonts.inter(color: Colors.redAccent)),
+                const Icon(Icons.wifi_off_outlined, size: 48, color: AppColors.alert),
                 const SizedBox(height: 24),
-                ElevatedButton(
-                  onPressed: _checkConnectivity,
-                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, foregroundColor: Colors.white),
-                  child: const Text('Retry Connection'),
+                Text(
+                  _status,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: AppColors.alert),
                 ),
+                const SizedBox(height: 48),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _checkConnectivity,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.all(20),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      elevation: 4,
+                    ),
+                    child: const Text('RETRY CONNECTION', style: TextStyle(fontWeight: FontWeight.w800, letterSpacing: 1)),
+                  ),
+                ),
+                const SizedBox(height: 12),
                 TextButton(
                   onPressed: () => Navigator.of(context).pushReplacementNamed('/home'),
-                  child: const Text('Proceed in Offline Mode'),
+                  style: TextButton.styleFrom(foregroundColor: AppColors.secondary),
+                  child: const Text('PROCEED IN OFFLINE MEDITATION', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
                 ),
               ],
             ],

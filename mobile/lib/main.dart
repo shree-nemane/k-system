@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:workmanager/workmanager.dart';
 import 'services/workmanager_callback.dart';
 import 'screens/welcome_screen.dart';
@@ -11,6 +12,8 @@ import 'screens/sos_screen.dart';
 import 'screens/health_check_screen.dart';
 import 'screens/smart_hubs_screen.dart';
 import 'screens/guide_screen.dart';
+
+import 'core/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +25,9 @@ void main() async {
   
   // 1. Initialize FMTC for Offline Mapping
   try {
-    await FMTCObjectBoxBackend().initialise();
+    final rootDirectoryPath = (await getApplicationDocumentsDirectory()).path;
+    await FMTCObjectBoxBackend().initialise(rootDirectory: rootDirectoryPath);
+    debugPrint('Offline Map Caching (FMTC) initialized.');
   } catch (e) {
     debugPrint('Offline Map Caching (FMTC) failed to initialize: $e');
   }
@@ -46,13 +51,7 @@ class MahaKumbhApp extends StatelessWidget {
     return MaterialApp(
       title: 'MahaKumbh 2027 Digital Guide',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFE6A85C), // Saffron accent
-          primary: const Color(0xFF2E5B7F), // Deep Blue
-        ),
-      ),
+      theme: AppTheme.lightTheme,
       // Initial route starts with the spiritual onboarding
       initialRoute: '/',
       routes: {
