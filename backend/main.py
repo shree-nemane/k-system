@@ -2,9 +2,9 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from app.core.logging_config import setup_logging
-from app.routers import crowd, sos, alerts, cameras, users, rituals
-from app.ws.manager import ws_manager
+from backend.app.core.logging_config import setup_logging
+from backend.app.routers import crowd, sos, alerts, cameras, users, rituals
+from backend.app.ws.manager import ws_manager
 import os
 
 # Ensure static directory exists

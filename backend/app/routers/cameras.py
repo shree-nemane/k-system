@@ -2,10 +2,10 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.security import verify_api_key
-from app.db.session import get_db
-from app.models.camera import Camera
-from app.schemas.camera import CamerasResponse, CameraRead
+from backend.app.core.security import verify_api_key
+from backend.app.db.session import get_db
+from backend.app.models.camera import Camera
+from backend.app.schemas.camera import CamerasResponse, CameraRead
 
 router = APIRouter(prefix="/cameras", tags=["cameras"])
 

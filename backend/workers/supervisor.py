@@ -6,10 +6,7 @@ import multiprocessing
 import sys
 from typing import Dict
 
-# Add parent directory to sys.path to allow absolute imports of 'workers'
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from workers.processor import CameraProcessor
+from backend.workers.processor import CameraProcessor
 
 
 class WorkerSupervisor:

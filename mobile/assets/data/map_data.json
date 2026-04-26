@@ -1,63 +1,75 @@
 {
   "markers": [
-    {"id": "G1", "name": "Main Sangam Ghat", "type": "ghat", "lat": 25.43, "lng": 81.89},
-    {"id": "G2", "name": "Arail Ghat", "type": "ghat", "lat": 25.41, "lng": 81.90},
-    {"id": "H1", "name": "Sector 4 Hub", "type": "hub", "lat": 25.42, "lng": 81.88},
-    {"id": "H2", "name": "Main Entrance Hub", "type": "hub", "lat": 25.45, "lng": 81.85}
+    {"id": "G1", "name": "Ram Kund (Nashik City)", "type": "ghat", "lat": 20.0075, "lng": 73.7925},
+    {"id": "G2", "name": "Kushavarta Kund (Trimbak)", "type": "ghat", "lat": 19.9322, "lng": 73.5303},
+    {"id": "H1", "name": "Panchvati Sacred Hub", "type": "hub", "lat": 20.0050, "lng": 73.7900},
+    {"id": "H2", "name": "Trimbakeshwar Shiva Temple", "type": "hub", "lat": 19.9315, "lng": 73.5310},
+    {"id": "H3", "name": "Tapovan Hermitage", "type": "hub", "lat": 20.0120, "lng": 73.8050}
   ],
   "sectors": [
     {
       "id": 1,
-      "name": "Sangam Main",
+      "name": "Panchvati Pilgrimage Zone",
       "color": "0xFFFFCC80",
       "points": [
-        {"lat": 25.43, "lng": 81.87},
-        {"lat": 25.44, "lng": 81.88},
-        {"lat": 25.44, "lng": 81.89},
-        {"lat": 25.43, "lng": 81.89}
+        {"lat": 20.005, "lng": 73.788},
+        {"lat": 20.010, "lng": 73.788},
+        {"lat": 20.010, "lng": 73.796},
+        {"lat": 20.005, "lng": 73.796}
       ]
     },
     {
-      "id": 4,
-      "name": "Arail Sector",
+      "id": 2,
+      "name": "Tapovan Monastic Sector",
+      "color": "0xFFB39DDB",
+      "points": [
+        {"lat": 20.010, "lng": 73.800},
+        {"lat": 20.015, "lng": 73.800},
+        {"lat": 20.015, "lng": 73.810},
+        {"lat": 20.010, "lng": 73.810}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Trimbakeshwar Town",
       "color": "0xFF80CBC4",
       "points": [
-        {"lat": 25.41, "lng": 81.88},
-        {"lat": 25.42, "lng": 81.89},
-        {"lat": 25.42, "lng": 81.90},
-        {"lat": 25.41, "lng": 81.90}
+        {"lat": 19.928, "lng": 73.528},
+        {"lat": 19.935, "lng": 73.528},
+        {"lat": 19.935, "lng": 73.535},
+        {"lat": 19.928, "lng": 73.535}
       ]
     }
   ],
   "routes": [
     {
       "id": "R1",
-      "name": "Sangam Approach Path",
+      "name": "Godavari Aarti Pathway",
       "color": "0xFF1976D2",
       "path": [
-        {"lat": 25.45, "lng": 81.85},
-        {"lat": 25.44, "lng": 81.86},
-        {"lat": 25.43, "lng": 81.88}
+        {"lat": 20.0040, "lng": 73.7880},
+        {"lat": 20.0075, "lng": 73.7925},
+        {"lat": 20.0100, "lng": 73.7950}
       ]
     },
     {
       "id": "R2",
-      "name": "Saraswati Ghat Trail",
+      "name": "Old Nashik Link",
       "color": "0xFF388E3C",
       "path": [
-        {"lat": 25.43, "lng": 81.85},
-        {"lat": 25.425, "lng": 81.86},
-        {"lat": 25.43, "lng": 81.87}
+        {"lat": 19.9980, "lng": 73.7850},
+        {"lat": 20.0030, "lng": 73.7890},
+        {"lat": 20.0075, "lng": 73.7925}
       ]
     },
     {
       "id": "R3",
-      "name": "Pontoon Bridge 4",
+      "name": "Nashik-Trimbak Pilgrim Path",
       "color": "0xFFFBC02D",
       "path": [
-        {"lat": 25.42, "lng": 81.88},
-        {"lat": 25.415, "lng": 81.885},
-        {"lat": 25.41, "lng": 81.89}
+        {"lat": 20.0075, "lng": 73.7925},
+        {"lat": 19.9700, "lng": 73.6600},
+        {"lat": 19.9322, "lng": 73.5303}
       ]
     }
   ]

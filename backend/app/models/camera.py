@@ -1,6 +1,6 @@
 from sqlalchemy import BigInteger, String, Boolean, Integer
 from sqlalchemy.orm import Mapped, mapped_column
-from app.db.base import Base
+from backend.app.db.base import Base
 
 class Camera(Base):
     __tablename__ = "cameras"

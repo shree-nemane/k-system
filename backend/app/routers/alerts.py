@@ -3,10 +3,10 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.security import verify_api_key
-from app.db.session import get_db
-from app.models.alert import Alert
-from app.schemas.alert import AlertsResponse, AlertRead
+from backend.app.core.security import verify_api_key
+from backend.app.db.session import get_db
+from backend.app.models.alert import Alert
+from backend.app.schemas.alert import AlertsResponse, AlertRead
 
 router = APIRouter(prefix="/alerts", tags=["alerts"])
 

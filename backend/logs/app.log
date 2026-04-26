@@ -81,3 +81,78 @@
 [2026-04-03 18:40:04] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
 [2026-04-03 18:40:04] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
 [2026-04-03 18:40:22] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-04 11:19:04] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-04 11:19:04] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-04 11:24:45] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-04 11:24:45] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-04 11:25:21] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-04 11:25:21] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 2
+[2026-04-04 11:25:55] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 1
+[2026-04-04 11:25:55] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 1
+[2026-04-04 11:30:06] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-04 11:30:06] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-04 11:55:44] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-04 11:55:44] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-04 12:00:53] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-04 12:00:53] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-04 12:05:01] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-04 12:05:13] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-04 12:05:13] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-04 13:17:06] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-04 13:17:06] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-17 10:40:59] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 10:41:19] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 10:41:19] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-17 10:43:20] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-17 10:47:21] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 10:47:21] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-17 10:49:28] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-17 10:49:28] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-17 10:52:20] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-17 10:52:20] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-17 10:52:21] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 10:52:21] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-17 10:52:22] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 10:52:22] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-17 10:52:25] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-17 10:52:25] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-17 10:53:51] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-17 10:53:51] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-17 10:58:14] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 10:58:14] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-17 10:58:27] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-17 10:58:27] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-17 11:00:09] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-17 11:00:09] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-17 11:00:11] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 11:00:11] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-17 11:00:12] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 11:00:12] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-17 11:00:14] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-17 11:00:14] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-17 11:02:42] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-17 11:02:42] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-17 11:02:43] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 11:02:43] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-17 11:02:44] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 11:02:44] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-17 11:02:47] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-17 11:02:47] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-17 11:07:43] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-17 11:07:43] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-17 11:07:44] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 11:07:44] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-17 11:07:46] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 11:07:46] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-17 11:07:48] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-17 11:07:48] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-17 11:08:13] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-17 11:08:13] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-17 11:08:14] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 11:08:14] [INFO] [app]: MahaKumbh Smart Guide API — Starting up
+[2026-04-17 11:08:22] [INFO] [app]: [WS] Handshake started: client=127.0.0.1, topic=global
+[2026-04-17 11:08:22] [INFO] [app.ws]: [WS] Client connected to 'global'. Total clients: 1
+[2026-04-17 11:14:50] [INFO] [app.ws]: [WS] Client disconnected. Total clients: 0
+[2026-04-17 11:14:50] [INFO] [app]: MahaKumbh Smart Guide API — Shutting down
+[2026-04-17 11:14:52] [INFO] [app]: Logging infrastructure initialized (Plan Logging)
+[2026-04-17 11:14:52] [INFO] [app]: MahaKumbh Smart Guide API — Starting up

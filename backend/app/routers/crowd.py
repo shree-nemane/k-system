@@ -4,12 +4,12 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select, func, Integer, Float, String
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.security import verify_api_key
-from app.db.session import get_db
-from app.models.crowd_event import CrowdEvent
-from app.models.alert import Alert
-from app.schemas.crowd import CrowdUpdateRequest, CrowdStatusResponse, CrowdStatusItem, CrowdHistoryResponse, CrowdHistoryItem
-from app.ws.manager import ws_manager
+from backend.app.core.security import verify_api_key
+from backend.app.db.session import get_db
+from backend.app.models.crowd_event import CrowdEvent
+from backend.app.models.alert import Alert
+from backend.app.schemas.crowd import CrowdUpdateRequest, CrowdStatusResponse, CrowdStatusItem, CrowdHistoryResponse, CrowdHistoryItem
+from backend.app.ws.manager import ws_manager
 
 logger = logging.getLogger("app.crowd")
 router = APIRouter(prefix="/crowd", tags=["crowd"])

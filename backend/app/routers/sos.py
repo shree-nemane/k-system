@@ -2,10 +2,10 @@ import uuid
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from app.core.security import verify_api_key
-from app.db.session import get_db
-from app.models.sos_request import SOSRequest
-from app.schemas.sos import SOSCreateRequest, SOSCreateResponse
+from backend.app.core.security import verify_api_key
+from backend.app.db.session import get_db
+from backend.app.models.sos_request import SOSRequest
+from backend.app.schemas.sos import SOSCreateRequest, SOSCreateResponse
 
 router = APIRouter(prefix="/sos", tags=["sos"])
 

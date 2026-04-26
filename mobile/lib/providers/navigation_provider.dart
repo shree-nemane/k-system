@@ -6,12 +6,14 @@ class NavigationState {
   final String? destinationName;
   final bool isNavigating;
   final String? instruction;
+  final List<LatLng> routePoints;
 
   NavigationState({
     this.destination,
     this.destinationName,
     this.isNavigating = false,
     this.instruction,
+    this.routePoints = const [],
   });
 
   NavigationState copyWith({
@@ -19,12 +21,14 @@ class NavigationState {
     String? destinationName,
     bool? isNavigating,
     String? instruction,
+    List<LatLng>? routePoints,
   }) {
     return NavigationState(
       destination: destination ?? this.destination,
       destinationName: destinationName ?? this.destinationName,
       isNavigating: isNavigating ?? this.isNavigating,
       instruction: instruction ?? this.instruction,
+      routePoints: routePoints ?? this.routePoints,
     );
   }
 }
@@ -32,12 +36,13 @@ class NavigationState {
 class NavigationNotifier extends StateNotifier<NavigationState> {
   NavigationNotifier() : super(NavigationState());
 
-  void startNavigation(LatLng destination, String name) {
+  void startNavigation(LatLng destination, String name, {List<LatLng> routePoints = const []}) {
     state = state.copyWith(
       destination: destination,
       destinationName: name,
       isNavigating: true,
       instruction: 'Proceeding towards $name',
+      routePoints: routePoints,
     );
   }
 

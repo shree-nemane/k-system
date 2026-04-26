@@ -101,7 +101,8 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
         }).toList();
 
         _markers = (data['markers'] as List).map((m) {
-          final isGhat = m['type'] == 'ghat';
+          final type = m['type'] as String;
+          final isGhat = type == 'ghat';
           final point = LatLng(m['lat'], m['lng']);
           final name = m['name'];
           
@@ -112,7 +113,11 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
             child: GestureDetector(
               onTap: () => _showMarkerDetails(name, point),
               child: Icon(
-                isGhat ? Icons.water_drop : Icons.help_center,
+                isGhat 
+                    ? Icons.water_drop 
+                    : type == 'hub' 
+                        ? Icons.temple_hindu 
+                        : Icons.place,
                 color: isGhat ? Colors.blue : AppColors.primary,
                 size: 30,
               ),
@@ -155,7 +160,17 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
               child: ElevatedButton.icon(
                 onPressed: () {
                   Navigator.pop(context);
-                  ref.read(navigationProvider.notifier).startNavigation(point, name);
+                  
+                  // Find predefined route that contains this point or is close to it
+                  List<LatLng> bestRoute = [];
+                  for (var poly in _polylines) {
+                    if (poly.points.any((p) => (p.latitude - point.latitude).abs() < 0.0001 && (p.longitude - point.longitude).abs() < 0.0001)) {
+                      bestRoute = poly.points;
+                      break;
+                    }
+                  }
+                  
+                  ref.read(navigationProvider.notifier).startNavigation(point, name, routePoints: bestRoute);
                 },
                 icon: const Icon(Icons.navigation, color: Colors.white),
                 label: const Text('NAVIGATE HERE', style: TextStyle(color: Colors.white)),
@@ -198,8 +213,8 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
           FlutterMap(
             mapController: _mapController,
             options: const MapOptions(
-              initialCenter: LatLng(25.45, 81.85),
-              initialZoom: 13,
+              initialCenter: LatLng(20.0075, 73.7925),
+              initialZoom: 14,
               minZoom: 10,
               maxZoom: 18,
             ),
@@ -215,10 +230,14 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
                 builder: (context, ref, child) {
                   final navState = ref.watch(navigationProvider);
                   if (navState.isNavigating && _userPosition != null && navState.destination != null) {
+                    final points = navState.routePoints.isNotEmpty 
+                        ? [_userPosition!, ...navState.routePoints] 
+                        : [_userPosition!, navState.destination!];
+                        
                     return PolylineLayer(
                       polylines: [
                         Polyline(
-                          points: [_userPosition!, navState.destination!],
+                          points: points,
                           color: AppColors.primary,
                           strokeWidth: 4,
                           pattern: StrokePattern.dashed(segments: const [10, 5]),

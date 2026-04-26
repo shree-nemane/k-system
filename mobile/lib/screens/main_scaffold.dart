@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../providers/tab_provider.dart';
 import 'dashboard_screen.dart';
 import 'home_map_screen.dart';
 import 'alerts_screen.dart';
@@ -13,7 +14,6 @@ class MainScaffold extends ConsumerStatefulWidget {
 }
 
 class _MainScaffoldState extends ConsumerState<MainScaffold> {
-  int _currentIndex = 0;
 
   final List<Widget> _screens = [
     const DashboardScreen(),
@@ -24,14 +24,16 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
 
   @override
   Widget build(BuildContext context) {
+    final currentIndex = ref.watch(tabProvider);
+
     return Scaffold(
       body: IndexedStack(
-        index: _currentIndex,
+        index: currentIndex,
         children: _screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
+        currentIndex: currentIndex,
+        onTap: (index) => ref.read(tabProvider.notifier).state = index,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: const Color(0xFF2E5B7F),
         unselectedItemColor: Colors.grey,

@@ -6,8 +6,8 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 from alembic import context
 
 # Import all models to populate Base.metadata
-from app.db.base import Base
-import app.models  # noqa — side effect: registers all ORM models
+from backend.app.db.base import Base
+import backend.app.models  # noqa — side effect: registers all ORM models
 
 config = context.config
 

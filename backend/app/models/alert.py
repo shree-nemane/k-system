@@ -1,7 +1,7 @@
 from datetime import datetime
 from sqlalchemy import BigInteger, String, Integer, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column
-from app.db.base import Base
+from backend.app.db.base import Base
 
 class Alert(Base):
     __tablename__ = "alerts"

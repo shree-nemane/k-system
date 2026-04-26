@@ -4,6 +4,9 @@ import 'package:intl/intl.dart';
 import '../models/ritual.dart';
 import '../providers/rituals_provider.dart';
 import '../core/constants.dart';
+import '../providers/navigation_provider.dart';
+import '../providers/tab_provider.dart';
+import 'package:latlong2/latlong.dart';
 
 class GuideScreen extends ConsumerStatefulWidget {
   const GuideScreen({super.key});
@@ -185,7 +188,20 @@ class _GuideScreenState extends ConsumerState<GuideScreen> {
                       ElevatedButton.icon(
                         onPressed: () {
                           // Link to map integration
-                          debugPrint('Navigate to map: ${ritual.locationCoord}');
+                          final lat = ritual.locationCoord[0];
+                          final lng = ritual.locationCoord[1];
+                          
+                          // 1. Start navigation
+                          ref.read(navigationProvider.notifier).startNavigation(
+                            LatLng(lat, lng), 
+                            ritual.title
+                          );
+
+                          // 2. Switch to Live Map Tab
+                          ref.read(tabProvider.notifier).state = 1;
+
+                          // 3. Return to Main Scaffold
+                          Navigator.pop(context);
                         },
                         icon: const Icon(Icons.near_me_outlined, size: 18),
                         label: const Text('PILGRIMAGE MAP'),

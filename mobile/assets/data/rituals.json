@@ -1,22 +1,32 @@
-﻿[
+[
   {
-    "ritualId": "rit_001",
-    "title": "Ganga Aarti",
-    "description": "The evening prayer ceremony at the banks of the Ganges.",
-    "location": "Dashashwamedh Ghat",
-    "locationCoord": [25.306, 83.011],
-    "category": "prayer",
-    "startTime": "2027-01-14T18:00:00Z",
+    "ritualId": "N1",
+    "title": "Prathama Shahi Snan",
+    "description": "First Royal Bath at Ram Kund, Nashik city centre. A truly celestial event.",
+    "location": "Ram Kund, Nashik",
+    "locationCoord": [20.0075, 73.7925],
+    "category": "Main Bath",
+    "startTime": "2027-08-14T04:30:00Z",
+    "importance": "critical"
+  },
+  {
+    "ritualId": "T1",
+    "title": "Trimbakeshwar Holy Bath",
+    "description": "Auspicious bathing at Kushavarta Kund in the holy town of Trimbak.",
+    "location": "Kushavarta Kund, Trimbak",
+    "locationCoord": [19.9322, 73.5303],
+    "category": "Main Bath",
+    "startTime": "2027-08-14T06:00:00Z",
     "importance": "high"
   },
   {
-    "ritualId": "rit_002",
-    "title": "Shahi Snan (Royal Bath)",
-    "description": "The main ceremonial bath of the Kumbh Mela.",
-    "location": "Sangam",
-    "locationCoord": [25.429, 81.886],
-    "category": "snan",
-    "startTime": "2027-01-14T04:00:00Z",
-    "importance": "critical"
+    "ritualId": "N2",
+    "title": "Panchvati Evening Aarti",
+    "description": "Evening divine light offering at Godavari banks near Ram Kund.",
+    "location": "Panchvati Hub",
+    "locationCoord": [20.0050, 73.7900],
+    "category": "Ceremony",
+    "startTime": "2027-08-15T18:30:00Z",
+    "importance": "low"
   }
 ]
