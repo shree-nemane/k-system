@@ -44,7 +44,7 @@ async def run_async_migrations() -> None:
 
 def run_migrations_online() -> None:
     # D-12: Load DATABASE_URL from environment/settings instead of hardcoding in .ini
-    from app.core.config import settings
+    from backend.app.core.config import settings
     config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
     asyncio.run(run_async_migrations())
 

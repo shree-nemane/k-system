@@ -187,7 +187,7 @@ with st.sidebar:
     
     # 2. Add API health check
     try:
-        resp = httpx.get("http://localhost:8000/health", timeout=1.0)
+        resp = httpx.get("http://127.0.0.1:8000/health", timeout=1.0)
         if resp.status_code == 200:
             st.success("✅ Backend API: ONLINE")
         else:

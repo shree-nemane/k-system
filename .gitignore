@@ -1,0 +1,65 @@
+# ========================
+# Python
+# ========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+*.egg
+dist/
+build/
+
+
+
+# ========================
+# Logs
+# ========================
+logs/
+*.log
+
+# ========================
+# IDE / Editor
+# ========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ========================
+# OS junk
+# ========================
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# ========================
+# AI Agent / GSD tooling
+# ========================
+.agent/
+.planning/
+
+# ========================
+# YOLO / ML artifacts
+# ========================
+*.pt
+runs/
+
+# ========================
+# Runtime generated files
+# ========================
+backend/app/static/snapshots/
+backend/logs/
+
+# ========================
+# Mobile / Flutter
+# ========================
+mobile/.metadata
+mobile/pubspec.lock
+mobile/devtools_options.yaml
+mobile/.flutter-plugins-dependencies
+mobile/build/
+mobile/.dart_tool/
+mobile/android/build/
+mobile/android/.gradle/
+mobile/mobile.iml
+*.iml

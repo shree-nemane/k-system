@@ -5,7 +5,7 @@ import multiprocessing
 import os
 from typing import Dict, Any
 
-from workers.detector import CrowdDetector
+from backend.workers.detector import CrowdDetector
 
 
 class CameraProcessor(multiprocessing.Process):

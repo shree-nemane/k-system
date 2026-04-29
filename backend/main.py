@@ -1,11 +1,17 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
+import os
+import sys
+
+# Add project root to sys.path to resolve 'backend' module imports
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 from backend.app.core.logging_config import setup_logging
 from backend.app.routers import crowd, sos, alerts, cameras, users, rituals
 from backend.app.ws.manager import ws_manager
-import os
 
 # Ensure static directory exists
 STATIC_DIR = "app/static"
@@ -63,3 +69,8 @@ async def websocket_crowd(websocket: WebSocket, topic: str = "global"):
 @app.get("/health")
 async def health_check():
     return {"status": "healthy", "service": "MahaKumbh Smart Guide API"}
+
+if __name__ == "__main__":
+    import uvicorn
+    from backend.app.core.config import settings
+    uvicorn.run("main:app", host=settings.APP_HOST, port=settings.APP_PORT, reload=True)

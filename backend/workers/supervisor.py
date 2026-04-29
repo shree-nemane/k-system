@@ -6,6 +6,11 @@ import multiprocessing
 import sys
 from typing import Dict
 
+# Add project root to sys.path so 'backend' can be resolved
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 from backend.workers.processor import CameraProcessor
 
 
@@ -106,7 +111,7 @@ if __name__ == "__main__":
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     CONFIG_FILE = os.path.join(BASE_DIR, "cameras.json")
     
-    API_URL = "http://localhost:8000"
+    API_URL = "http://127.0.0.1:8000"
     API_KEY = "mahakumbh-secret-2027"  # Matches backend .env key
 
     # Handle termination signals
