@@ -8,6 +8,8 @@ class AlertRead(BaseModel):
     severity: str
     person_count: int | None
     threshold: int | None
+    message: str | None
+    recommendation: str | None
     fired_at: datetime
 
     model_config = {"from_attributes": True}

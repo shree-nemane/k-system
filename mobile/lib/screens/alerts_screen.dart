@@ -102,16 +102,46 @@ class AlertsScreen extends ConsumerWidget {
                                 ),
                                 const SizedBox(height: 16),
                                 Text(
-                                  alert.eventType.replaceAll('_', ' ').toUpperCase(),
-                                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
+                                  alert.message ?? alert.eventType.replaceAll('_', ' ').toUpperCase(),
+                                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontSize: 18, 
+                                    fontWeight: FontWeight.bold,
+                                    color: alert.severity == 'high' || alert.severity == 'critical' ? AppColors.alert : null,
+                                  ),
                                 ),
+                                if (alert.recommendation != null) ...[
+                                  const SizedBox(height: 12),
+                                  Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: severityColor.withValues(alpha: 0.05),
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(color: severityColor.withValues(alpha: 0.2)),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.security, size: 16, color: severityColor),
+                                        const SizedBox(width: 8),
+                                        Expanded(
+                                          child: Text(
+                                            alert.recommendation!,
+                                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                              color: severityColor,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                                 const SizedBox(height: 12),
                                 Row(
                                   children: [
                                     const Icon(Icons.location_pin, size: 16, color: AppColors.secondary),
                                     const SizedBox(width: 6),
                                     Text(
-                                      'Sector 4 • Prayagraj', 
+                                      'Prayagraj • Uttar Pradesh', 
                                       style: Theme.of(context).textTheme.bodyMedium,
                                     ),
                                   ],

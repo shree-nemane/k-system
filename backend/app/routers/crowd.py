@@ -63,19 +63,39 @@ async def update_crowd(
 
     alert_data = None
     if trigger_push:
+        # Generate descriptive message and recommendation (D-25)
+        # In a real app, we'd lookup the camera name from DB or config
+        location_name = payload.camera_id
+        # Simple lookup for demonstration based on cameras.json
+        cam_names = {
+            "cam_01": "Triveni Sangam Ghat",
+            "cam_02": "Ram Ghat",
+            "cam_03": "Sector 4 Pontoon Bridge",
+            "cam_04": "Magh Mela Camp North Gate"
+        }
+        loc = cam_names.get(payload.camera_id, payload.camera_id)
+        
+        msg = f"Crowd Alert: Extreme overcrowding detected at {loc}. Current count: {payload.person_count}."
+        rec = "Safety Note: Please avoid this area for the next 30 minutes. Follow the nearest exit signs and cooperate with security personnel."
+
         alert = Alert(
             event_type="overcrowd",
             camera_id=payload.camera_id,
             severity="high",
             person_count=payload.person_count,
             threshold=payload.alert_threshold,
+            message=msg,
+            recommendation=rec
         )
         db.add(alert)
         alert_data = {
             "type": "alert",
             "event": "overcrowd",
             "camera_id": payload.camera_id,
+            "location": loc,
             "severity": "high",
+            "message": msg,
+            "recommendation": rec,
             "timestamp": now.isoformat(),
             "data": {
                 "person_count": payload.person_count,
@@ -86,11 +106,19 @@ async def update_crowd(
     await db.commit()
 
     # 3. Broadcast density update (D-09)
-    # Ideally we determine the sector from the camera's location_label
-    # For now, we broadcast updates to the 'global' topic and specific camera ID topic
+    # Map camera ID to human-readable location for public consumption
+    cam_names = {
+        "cam_01": "Triveni Sangam Ghat",
+        "cam_02": "Ram Ghat",
+        "cam_03": "Sector 4 Pontoon Bridge",
+        "cam_04": "Magh Mela Camp North Gate"
+    }
+    loc = cam_names.get(payload.camera_id, "Main Sector")
+
     update_payload = {
         "type": "density_update",
         "camera_id": payload.camera_id,
+        "location": loc,
         "person_count": payload.person_count,
         "density_level": payload.density_level,
         "timestamp": now.isoformat(),

@@ -170,7 +170,12 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
                     }
                   }
                   
-                  ref.read(navigationProvider.notifier).startNavigation(point, name, routePoints: bestRoute);
+                  ref.read(navigationProvider.notifier).startNavigation(
+                    point,
+                    name,
+                    origin: _userPosition,
+                    routePoints: bestRoute,
+                  );
                 },
                 icon: const Icon(Icons.navigation, color: Colors.white),
                 label: const Text('NAVIGATE HERE', style: TextStyle(color: Colors.white)),
@@ -230,17 +235,21 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
                 builder: (context, ref, child) {
                   final navState = ref.watch(navigationProvider);
                   if (navState.isNavigating && _userPosition != null && navState.destination != null) {
-                    final points = navState.routePoints.isNotEmpty 
-                        ? [_userPosition!, ...navState.routePoints] 
+                    // OSRM route already includes start→end along roads
+                    // Fallback to straight line only if route is empty
+                    final points = navState.routePoints.isNotEmpty
+                        ? navState.routePoints
                         : [_userPosition!, navState.destination!];
-                        
+
                     return PolylineLayer(
                       polylines: [
                         Polyline(
                           points: points,
                           color: AppColors.primary,
-                          strokeWidth: 4,
-                          pattern: StrokePattern.dashed(segments: const [10, 5]),
+                          strokeWidth: 5,
+                          pattern: navState.isLoadingRoute
+                              ? StrokePattern.dashed(segments: const [10, 5])
+                              : const StrokePattern.solid(),
                         ),
                       ],
                     );
@@ -311,7 +320,7 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
             ),
           ),
 
-          // Layer & Location Controls
+          // Layer, Zoom & Location Controls
           Positioned(
             bottom: 30,
             right: 20,
@@ -322,6 +331,28 @@ class _HomeMapScreenState extends ConsumerState<HomeMapScreen> {
                   onPressed: () => setState(() => _showRoutes = !_showRoutes),
                   backgroundColor: _showRoutes ? AppColors.primary : Colors.white,
                   child: Icon(Icons.route, color: _showRoutes ? Colors.white : AppColors.primary),
+                ),
+                const SizedBox(height: 12),
+                // Zoom In
+                FloatingActionButton.small(
+                  heroTag: 'zoom_in',
+                  onPressed: () {
+                    final currentZoom = _mapController.camera.zoom;
+                    _mapController.move(_mapController.camera.center, currentZoom + 1);
+                  },
+                  backgroundColor: Colors.white,
+                  child: const Icon(Icons.add, color: AppColors.primary),
+                ),
+                const SizedBox(height: 8),
+                // Zoom Out
+                FloatingActionButton.small(
+                  heroTag: 'zoom_out',
+                  onPressed: () {
+                    final currentZoom = _mapController.camera.zoom;
+                    _mapController.move(_mapController.camera.center, currentZoom - 1);
+                  },
+                  backgroundColor: Colors.white,
+                  child: const Icon(Icons.remove, color: AppColors.primary),
                 ),
                 const SizedBox(height: 12),
                 FloatingActionButton(

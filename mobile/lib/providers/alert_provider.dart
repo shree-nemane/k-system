@@ -7,6 +7,8 @@ class Alert {
   final String eventType;
   final String cameraId;
   final String severity;
+  final String? message;
+  final String? recommendation;
   final DateTime firedAt;
 
   Alert({
@@ -14,6 +16,8 @@ class Alert {
     required this.eventType,
     required this.cameraId,
     required this.severity,
+    this.message,
+    this.recommendation,
     required this.firedAt,
   });
 
@@ -23,6 +27,8 @@ class Alert {
       eventType: json['event_type'],
       cameraId: json['camera_id'],
       severity: json['severity'],
+      message: json['message'],
+      recommendation: json['recommendation'],
       firedAt: DateTime.parse(json['fired_at']),
     );
   }

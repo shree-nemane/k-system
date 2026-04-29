@@ -1,9 +1,14 @@
+import sys
+import os
 import asyncio
 from logging.config import fileConfig
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from alembic import context
+
+# Add project root to path so 'backend' package is found
+sys.path.insert(0, os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 # Import all models to populate Base.metadata
 from backend.app.db.base import Base

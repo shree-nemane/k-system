@@ -12,6 +12,8 @@ class Alert(Base):
     severity: Mapped[str] = mapped_column(String(10), nullable=False)  # 'low', 'medium', 'high'
     person_count: Mapped[int | None] = mapped_column(Integer, nullable=True)
     threshold: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    message: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    recommendation: Mapped[str | None] = mapped_column(String(500), nullable=True)
     fired_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )

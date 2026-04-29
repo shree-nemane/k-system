@@ -46,15 +46,21 @@ class LiveAlertNotifier extends StateNotifier<AsyncValue<List<Alert>>> {
             eventType: message['event'] ?? 'incident',
             cameraId: message['camera_id'] ?? 'unknown',
             severity: message['severity'] ?? 'high',
+            message: message['message'],
+            recommendation: message['recommendation'],
             firedAt: DateTime.now(),
           );
         } else if (type == 'density_update') {
           // Ordinary Density Update (D-09) - Shown as info
+          // Extract location name if provided, otherwise generic
+          final location = message['location'] ?? 'Sector Area';
           newAlert = Alert(
             id: DateTime.now().millisecondsSinceEpoch,
             eventType: "density_check",
             cameraId: message['camera_id'] ?? 'unknown',
             severity: "medium", // Shown as Saffron in AlertsScreen
+            message: "Routine density check at $location: All clear.",
+            recommendation: "Safe environment. Enjoy your pilgrimage.",
             firedAt: DateTime.now(),
           );
         }

@@ -97,6 +97,21 @@ def get_active_sos():
         # Table might not exist yet if migrations haven't run, but we assume it does based on models
         return pd.DataFrame()
 
+def get_recent_alerts(limit=5):
+    """Fetch most recent critical alerts from the alerts table."""
+    engine = get_engine()
+    query = text("""
+        SELECT event_type, camera_id, severity, message, recommendation, fired_at
+        FROM alerts
+        ORDER BY fired_at DESC
+        LIMIT :limit;
+    """)
+    try:
+        with engine.connect() as conn:
+            return pd.read_sql(query, conn, params={"limit": limit})
+    except Exception:
+        return pd.DataFrame()
+
 # --- UI Components ---
 
 def draw_custom_css():
@@ -228,12 +243,23 @@ def dashboard_content_fragment(h_hours):
             panic_count = status_df['is_panic'].sum() if not status_df.empty else 0
             sos_count = len(sos_df)
             
+            alerts_df = get_recent_alerts(limit=5)
+            
+            if not alerts_df.empty:
+                for _, alert in alerts_df.iterrows():
+                    st.error(f"**{alert['event_type'].upper()}** @ {alert['camera_id']}")
+                    st.write(f"_{alert['message']}_")
+                    if alert['recommendation']:
+                        st.info(f"💡 {alert['recommendation']}")
+                    st.caption(f"Fired at: {alert['fired_at']}")
+                    st.divider()
+            
             if panic_count > 0:
                 st.error(f"⚠️ AI detection: {panic_count} panic events active!")
             if sos_count > 0:
                 st.warning(f"🆘 User reports: {sos_count} active emergency signals.")
-            if panic_count == 0 and sos_count == 0:
-                st.info("No critical safety alerts in last cycle.")
+            if panic_count == 0 and sos_count == 0 and alerts_df.empty:
+                st.success("No critical safety alerts in last cycle.")
 
         st.divider()
 
