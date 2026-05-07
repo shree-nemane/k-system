@@ -14,8 +14,8 @@ class CrowdStatusItem(BaseModel):
     camera_id: str
     person_count: int
     density_level: str
-    panic_score: float = 0.0
-    is_panic: bool = False
+    panic_score: float | None = 0.0
+    is_panic: bool | None = False
     timestamp: datetime
 
     model_config = {"from_attributes": True}

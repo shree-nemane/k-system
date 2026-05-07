@@ -15,7 +15,7 @@
       "name": "Ram Ghat – Entry",
       "location_label": "Ram Ghat",
       "source": "rtsp://192.168.1.102/stream",
-      "active": false,
+      "active": true,
       "low_thresh": 20,
       "high_thresh": 60,
       "max_age": 10

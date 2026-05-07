@@ -49,11 +49,7 @@ The project shifts the paradigm from "Reactive" to "Proactive" crowd management.
 1.  **Map Tile Caching:** The app uses `flutter_map` with local tile caching for pre-selected sectors (Ghats, Camps, Medical).
 2.  **Predefined Routing:** Routes between key locations are pre-calculated or fetched from OSRM and cached, ensuring navigation works without a server connection.
 
-#### D. Group Coordination (Find My Group)
-1.  **Real-time Sync:** Uses **Firebase Realtime Database** for low-latency position updates among group members.
-2.  **Privacy Control:** Users can toggle location sharing on/off.
-
-#### E. Spiritual Guide
+#### D. Spiritual Guide
 1.  **Offline Content:** Ritual calendars, Shahi Snan (bathing) dates, and cultural info stored as local JSON assets.
 
 ---

@@ -1,0 +1,84 @@
+[
+  [
+    "TC-01",
+    "App Launch / Health Check",
+    "PASS",
+    {
+      "status": "healthy",
+      "service": "MahaKumbh Smart Guide API"
+    }
+  ],
+  [
+    "TC-02",
+    "SOS Trigger (Online)",
+    "PASS",
+    {
+      "id": "5cd8d944-4ebc-41dc-86a1-ebd687b2878c",
+      "status": "pending",
+      "responder_name": null,
+      "message": "SOS received"
+    }
+  ],
+  [
+    "TC-03",
+    "SOS Queuing (Offline)",
+    "PASS",
+    "Data persisted locally"
+  ],
+  [
+    "TC-04",
+    "SOS Auto-Sync",
+    "PASS",
+    {
+      "id": "b3050904-0645-4a6a-b42d-61c7e72eab96",
+      "status": "pending",
+      "responder_name": null,
+      "message": "SOS received"
+    }
+  ],
+  [
+    "TC-05",
+    "Offline Map & Search (Mock)",
+    "PASS",
+    "Found 1 POIs"
+  ],
+  [
+    "TC-06",
+    "Spiritual Guide Access",
+    "PASS",
+    "2 rituals found"
+  ],
+  [
+    "TC-07",
+    "Crowd Count Update",
+    "PASS",
+    {
+      "status": "ok",
+      "alert_triggered": false
+    }
+  ],
+  [
+    "TC-08",
+    "High Density Alert",
+    "PASS",
+    {
+      "status": "ok",
+      "alert_triggered": false
+    }
+  ],
+  [
+    "TC-09",
+    "Panic Detection",
+    "PASS",
+    {
+      "status": "ok",
+      "alert_triggered": false
+    }
+  ],
+  [
+    "TC-10",
+    "Dashboard Live Sync",
+    "PASS",
+    "Synced 3 cameras"
+  ]
+]
